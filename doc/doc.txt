@@ -1,0 +1,82 @@
+# Macro Notify Plugin for Neovim
+
+## Overview
+
+![Demo Animation](./.github/macro.gif)
+
+**Macro Notify** is a Neovim plugin that provides visual notifications when you start and end recording macros. This helps improve workflow clarity and reduces confusion while using macros in Neovim.
+
+GitHub Repository: [maarutan/macro-notify.nvim](https://github.com/maarutan/macro-notify.nvim)
+
+## Features
+
+- Displays customizable notifications when you start and end a macro.
+- Supports user-defined icons and messages.
+- Lightweight and integrates seamlessly with Neovim.
+- Configurable via Lua.
+
+## Installation
+
+This plugin uses [lazy.nvim](https://github.com/folke/lazy.nvim) for installation. Add the following configuration to your `lazy.nvim` setup:
+
+```lua
+{
+  "maarutan/macro-notify.nvim",
+  config = function()
+    require("macro-notify").setup {
+      message_start = "Macro started on register: ",
+      message_end = "Macro ended on register: ",
+      icon_start = "📼",
+      icon_end = "✅",
+    }
+  end,
+}
+```
+
+## Configuration
+
+The plugin can be configured with the `setup` function. Here are the default options:
+
+```lua
+require("macro-notify").setup {
+  message_start = "macro: ", -- Message for macro start
+  message_end = "ended: ", -- Message for macro end
+  icon_start = "🚀", -- Icon for macro start
+  icon_end = "💀", -- Icon for macro end
+}
+```
+
+### Parameters
+
+- `message_start` (string): The notification message displayed when a macro starts.
+- `message_end` (string): The notification message displayed when a macro ends.
+- `icon_start` (string): The icon displayed alongside the start notification.
+- `icon_end` (string): The icon displayed alongside the end notification.
+
+## How It Works
+
+- The plugin leverages Neovim's autocommand events `RecordingEnter` and `RecordingLeave` to detect when a macro starts and ends.
+- Notifications are displayed using `vim.notify`, along with the configured messages and icons.
+
+## Example Usage
+
+When recording a macro:
+
+1. Press `q` followed by a register (e.g., `qa`).
+2. The notification "🚀 macro: a" appears, indicating that macro recording has started on register `a`.
+3. Press `q` again to stop recording.
+4. The notification "💀 ended: a" appears, indicating the macro has ended.
+
+## Dependencies
+
+- Neovim 0.7+
+- A notification plugin or built-in `vim.notify` support.
+
+## License
+
+This plugin is open-sourced under the MIT License. See the [LICENSE](https://github.com/maarutan/macro-notify.nvim/blob/main/LICENSE) file for more details.
+
+---
+
+Thank you for using **Macro Notify**! Feel free to contribute or report issues on the [GitHub repository](https://github.com/maarutan/macro-notify.nvim).
+
